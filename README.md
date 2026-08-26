@@ -63,7 +63,7 @@ quant_engine/
 
 ### Setup Environment
 ```bash
-git clone https://github.com/kocourekmourek/quant_engine.git
+git clone https://github.com/kocourekmourek/quant-options-pricing.git
 cd quant_engine
 pip install numpy scipy pandas yfinance plotly pytest
 ```
