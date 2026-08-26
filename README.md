@@ -8,23 +8,31 @@ A high-performance quantitative finance library in Python implementing closed-fo
 
 ### Geometric Brownian Motion (GBM)
 Asset price dynamics follow the standard risk-neutral SDE:
+
 $$dS_t = r S_t \, dt + \sigma S_t \, dW_t$$
 
 Integrated analytically via Itô's Lemma:
+
 $$S_T = S_0 \exp\left(\left(r - \frac{1}{2}\sigma^2\right)T + \sigma \sqrt{T} Z\right), \quad Z \sim \mathcal{N}(0, 1)$$
 
 ### Heston Stochastic Volatility Model
 To account for market-implied skew and stochastic variance, the model solves two coupled SDEs:
+
 $$\begin{aligned}
 dS_t &= r S_t \, dt + \sqrt{v_t} S_t \, dW_t^S \\
 dv_t &= \kappa(\theta - v_t) \, dt + \xi \sqrt{v_t} \, dW_t^v
 \end{aligned}$$
-where $\mathbb{E}[dW_t^S \, dW_t^v] = \rho \, dt$, discretized using the **Full Truncation Scheme** to handle Feller condition violations ($2\kappa\theta < \xi^2$).
+
+where $\mathbb{E}[dW_t^S \, dW_t^v] = \rho \, dt$, discretized using the **Full Truncation Scheme** to handle Feller condition violations ($2\kappa\theta \lt \xi^2$).
 
 ### Numerical Inversion (Newton-Raphson IV Engine)
 Inverts market prices $C_{\text{Market}}$ to extract implied volatility $\sigma^*$ where:
-$$f(\sigma) = C_{\text{BS}}(\sigma) - C_{\text{Market}} = 0$$
-$$\sigma_{n+1} = \sigma_n - \frac{C_{\text{BS}}(\sigma_n) - C_{\text{Market}}}{\mathcal{V}_{\text{BS}}(\sigma_n)}$$
+
+$$\begin{aligned}
+f(\sigma) &= C_{\text{BS}}(\sigma) - C_{\text{Market}} = 0 \\
+\sigma_{n+1} &= \sigma_n - \frac{C_{\text{BS}}(\sigma_n) - C_{\text{Market}}}{\mathcal{V}_{\text{BS}}(\sigma_n)}
+\end{aligned}$$
+
 where $\mathcal{V}_{\text{BS}} = \frac{\partial C}{\partial \sigma} = S \sqrt{T} \phi(d_1)$ is option Vega.
 
 ---
