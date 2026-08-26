@@ -63,7 +63,7 @@ quant_engine/
 
 ### Setup Environment
 ```bash
-git clone [https://github.com/](https://github.com/)<your-username>/quant_engine.git
+git clone [https://github.com/](https://github.com/)kocourekmourek/quant_engine.git
 cd quant_engine
 pip install numpy scipy pandas yfinance plotly pytest
 ```
